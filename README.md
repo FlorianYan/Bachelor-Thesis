@@ -1,33 +1,29 @@
 # Efficient Algorithms for Agnostically Learning Halfspaces Under Distributional Assumptions
 
-This repository contains code for benchmarking two algorithms $L_1$ and $L_2$—described in the bachelor thesis titled **"Efficient Algorithms for Agnostically Learning Halfspaces Under Distributional Assumptions."** These algorithms are evaluated using synthetic data generated from a distribution, where each dataset consists of 1D points drawn from the standard normal distribution.
+This repository contains code for benchmarking the $L_1$ and $L_2$ algorithms described in the bachelor thesis titled **"Efficient Algorithms for Agnostically Learning Halfspaces Under Distributional Assumptions."** These algorithms are evaluated using synthetic data generated from the standard normal distribution.
 
 ## Overview
 
 The goal of this repository is to benchmark two algorithms for agnostic learning of halfspaces. Specifically, the two algorithms are:
 
-- **$L_1$ algorithm**: A method for solving the learning problem using the $L_1$ norm.
-- **$L_2$ algorithm**: A method for solving the learning problem using the $L_2$ norm.
+- **$L_1$ algorithm**: An algorithm based on $L_1$-norm polynomial regression for learning halfspaces.
+- **$L_2$ algorithm**: An algorithm based on $L_2$-norm polynomial regression for learning halfspaces.
 
 The repository includes scripts to generate synthetic data, apply these algorithms, and store the results in CSV format for evaluation. This is a small part of the overall thesis, which is mainly theoretical in nature.
 
 ## Repository Structure
 
-To better organize the files, here’s a recommended directory structure:
 ```
-/Efficient-Halfspace-Learning
+/Bachelor-Thesis
 ├── data/
-│   ├── dataset1.csv
-│   ├── dataset2.csv
+│   ├── data__0%.csv
+│   ├── data_5%.csv
 │   ├── ...
 ├── src/
 │   ├── data_generator.py
 │   ├── solver.py
-│   ├── utils.py
 ├── results/
-│   ├── L1_results.csv
-│   ├── L2_results.csv
-│   ├── ...
+│   ├── data_generator.py
 ├── README.md
 └── requirements.txt
 ```
@@ -36,11 +32,10 @@ To better organize the files, here’s a recommended directory structure:
 
 - `data/`: Contains the generated datasets in CSV format (e.g., `dataset1.csv`, `dataset2.csv`, etc.).
 - `src/`: Contains the Python scripts.
-  - `data_generator.py`: Script for generating synthetic datasets with 1D points sampled from the standard normal distribution and labeled based on their sign.
+  - `data_generator.py`: Script for generating synthetic datasets with 1D points sampled from the standard normal distribution and then labeled.
   - `solver.py`: Script implementing both the $L_1$ and $L_2$ algorithms for learning the halfspaces.
-  - `utils.py`: (optional) Any helper functions used in the scripts.
-- `results/`: Directory where output files (e.g., algorithm results) are saved, like `L1_results.csv` and `L2_results.csv`.
-- `requirements.txt`: List of required Python packages for running the code (e.g., `numpy`, `pandas`, `matplotlib`).
+- `results/`: Directory where algorithm results are saved for each dataset. 
+- `requirements.txt`: List of required Python packages for running the code.
 
 ## Getting Started
 
@@ -50,7 +45,7 @@ To run the code and replicate the experiments from the thesis, follow these step
 
 ```bash
 git clone https://github.com/your-username/Efficient-Halfspace-Learning.git
-cd Efficient-Halfspace-Learning
+cd Bachelor-Thesis
 ```
 
 ### 2. Install required dependencies:
@@ -63,31 +58,23 @@ pip install -r requirements.txt
 
 ### 3. Generate datasets::
 
-To generate a dataset, you can run the data_generator.py script. By default, it will generate 10,000 points (you can change the number of points by passing the --num_points argument).
+To generate a dataset, you can run the data_generator.py script. 
 The datasets, which were used in the thesis are found under `data/`
+For example, to generate 10 000 datapoints with opt=0.1 and labels flipped on ones side, run the following command
 
 ```bash
-python src/data_generator.py --num_points 10000 --output_file data/dataset1.csv
+python src/data_generator.py -o 0.1 --flip_type one_side 
 ```
-This will generate a CSV file (dataset1.csv) in the data/ directory.
+This will generate a CSV file in the `data/` directory.
 
 ### 4. Run the algorithms:
 
-Once you have generated the datasets, you can apply the $L_1$ and $L_2$ algorithms. The results will be saved in the results/ directory.
+Once you have generated the datasets, you can apply the $L_1$ and $L_2$ algorithms and compare their performance.
 
-To run the $L_1$ solver:
+To run the solver:
 ```bash
 python src/solver.py --algorithm L1 --input_file data/dataset1.csv --output_file results/L1_results.csv
 ```
-
-To run the $L_2$ solver:
-```bash
-python src/solver.py --algorithm L2 --input_file data/dataset1.csv --output_file results/L2_results.csv
-```
-
-### 5. Explore Results:
-
-The results of each algorithm will be saved in the results/ directory as CSV files. You can analyze these results or visualize them as needed.
 
 ### License:
 
