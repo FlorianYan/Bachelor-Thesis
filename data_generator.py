@@ -59,9 +59,9 @@ def main(n: int, opt: float, flip_type: str, flip_symmetry: str, left: float = 0
 
     # Generate the output file name based on provided options
     if flip_type == 'asymmetric':
-        output_file = f"data_{flip_type}_{left}_{right}.csv"
+        output_file = f"data_{flip_type}_{int(left*100)}%_{int(right*100)}%.csv"
     else:
-        output_file = f"data_{flip_type}_{opt}.csv"
+        output_file = f"data_{flip_type}_{int(opt*100)}%.csv"
 
     file_path = os.path.join('data', output_file)
 
