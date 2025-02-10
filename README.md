@@ -71,11 +71,4 @@ This will generate a CSV file in the `data/` directory.
 
 Once you have generated the datasets, you can apply the $L_1$ and $L_2$ algorithms and compare their performance.
 
-To run the solver:
-```bash
-python src/solver.py --algorithm L1 --input_file data/dataset1.csv --output_file results/L1_results.csv
-```
-
-### License:
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+`.ipynb` solvers were used during the actual benchmarking of the thesis, the `.py` scripts for streamlined usage are currently under construction.
